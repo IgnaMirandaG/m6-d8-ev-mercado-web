@@ -1,0 +1,64 @@
+<div class="galeria-productos py-5 g-5 row">
+    {{#each productos}}
+    <div class="contenedor-producto col-12  col-sm-6 col-md-4" id="producto-{{this.sku}}" date-nombre="{{this.nombre}}">
+        <img src={{this.img}} alt="{{this.nombre}}" class="d-block mx-auto">
+        <div class="info-producto">
+            <h2 class="fs-3 text-center">{{this.nombre}}</h2>
+            <p class="precio text-center fs-5"><strong>{{this.precio}}</strong></p>
+            <button class="btn btn-primary btn-add-carrito container" onclick = "btnAgregarCarrito('{{this.sku}}', '{{this.nombre}}', '{{this.precio}}', '{{this.img}}')">Añadir al carrito</button>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<script>
+    // FUNCIONALIDAD CARRITO DE COMPRAS
+
+    let carrito = [];
+
+    //Función para agregar productos al carrito
+    function btnAgregarCarrito(sku, nombre, precio, img) {
+        let item = {sku, nombre, precio, img};
+        //buscar si el producto existe con find() por id
+        let productoExistente = carrito.find(p => p.sku === sku);
+        //Validar si el producto existe en el carrito
+        if (productoExistente) {
+            //true muesta alert
+            alert("Este producto ya se encuentra en el carrito");
+        } else {
+            //false pushea producto 
+            carrito.push(item);
+            //agregar opacidad al producto despues de agregar
+            document.getElementById(`producto-${sku}`).style.opacity = "0.5";
+        }
+    }
+
+</script>
+
+
+
+<style>
+    /* CONTAINER DE PRODUCTOS*/
+    .contenedor-producto {
+        border-radius: 10px;
+    }
+
+    .contenedor-producto:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
+    }
+
+    .contenedor-producto img {
+        width: 70%;
+        height: 200px;
+       
+    }
+
+    .contenedor-producto:hover img {
+        transform: scale(1.1);
+    }
+
+    .btn-add-carrito {
+        padding: 15px 10px;
+        cursor: pointer;
+    }
+</style>

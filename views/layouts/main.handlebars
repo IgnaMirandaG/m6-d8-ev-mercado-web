@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado web</title>
+
+    {{!-- CSS BOOTSTRAP NPM --}}
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    {{!-- JS BOOTSTRAP NPM --}}
+    <script defer src="/bootstrap/js/bootstrap.bundle.js"></script>
+    {{!-- JQUERY NPM --}}
+    <script defer src="/jquery/jquery.min.js"></script>
+
+    {{!-- LIBRERÍA FONTAWESOME --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    {{!-- <link rel="stylesheet" href="/public/assets/css/style.css"> --}}
+
+</head>
+
+<body>
+    <header>
+        {{> navbar}}
+    
+    </header>
+
+    <main class="container py-4">
+        {{{body}}}
+    </main>
+
+    <footer class="container-footer text-center">
+        {{> footer}}
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<nav class="navbar bg-success py-2">
+  <div class="container-fluid d-flex justify-content-center">
+    <div class="container-cart">
+      <div class="container-cart-icon py-3">
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="actualizarModal()">
+          <i class="fa-solid fa-cart-shopping text-white fs-1"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {{!-- MODAL CARRITO --}}
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Tu carrito:</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul id="cart-list">
+
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Seguir comprando</button>
+          <button type="button" class="btn btn-success">Ir a pagar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</nav>
+
+<script>
+
+  //FUNCIONALIDAD DE CARRITO EN NAVBAR PARA MODAL
+  
+  //Función para actualizar info de Modal
+  function actualizarModal() {
+    //capturar cuerpo del modal para poder agregar contenido
+    let cartList = document.getElementById("cart-list");
+    //validación de productos en el carrito
+    if (carrito.length === 0) {
+      //si es cierto, mostrar mensaje de que no hay productos en el modal
+      cartList.innerHTML = '<li>El carrito está vacío</li>';
+    } else {
+      //si hay productos, crear lista con map y concatenar la información con espacio para cada item
+      const listaHTML = carrito.map(item => 
+        `<li>${item.nombre} - ${item.precio} 
+         <button class="btn btn-danger" onclick="eliminarDelCarrito('${item.sku}')">Eliminar</button></li>`
+      ).join('');
+      
+      cartList.innerHTML = listaHTML;
+    }
+  }
+
+  //Función para eliminar un producto del carrito por id
+  function eliminarDelCarrito(sku) {
+    //encontrar el indice del producto en el carrito
+    const index = carrito.findIndex(item => item.sku === sku);
+    //validación para poder eliminar
+    if (index !== -1) {
+      carrito.splice(index, 1);
+    }
+    //actualizar el modal
+    actualizarModal();
+    
+    //para restaurar opacidad al eliminar un producto del carrito
+    const producto = document.getElementById(`producto-${sku}`);
+    if (producto) {
+      producto.style.opacity = "1";
+    }
+  }
+
+  //llamar a función para actualizar modal
+  actualizarModal();
+
+
+</script>
